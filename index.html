@@ -10,25 +10,63 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <title>Title</title>
 </head>
+
 <body>
     <header>
+        <section class="hero has-background-grey-light has-text-centered">
+            <div class="hero-body">
+                <div class="container">
 
-    </header>
-    <main>
-        <section class="hero">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">
-                Hero title
-              </h1>
-              <h2 class="subtitle">
-                Hero subtitle
-                <form id='srch-form' action="">
-                    <input id='srch-title' type="text" placeholder="Movie Title">
-                </form>
-              </h2>
+                    <h1 class="title">
+                        MovieMate
+                    </h1>
+
+                    <h2 class="subtitle">
+                        Search for movies - Get the details!
+                    </h2>
+    
+                    <header class="columns">
+                        <section class="column is-one-fifth is-hidden-mobile"></section>
+                        <section class="column is-three-fifths is-12-mobile">
+                            <form id='srch-form' action="">
+                                <p class="control center" >
+                                    <input class="input" id='srch-title' type="text" placeholder="Movie Title">
+                                </p>
+                            </form>
+                        </section>
+                        <section class="column is-one-fifth is-hidden-mobile"></section>
+                    </header>
+
+                </div>
             </div>
-          </div>
+          </section>
+    </header>
+
+    <main>
+        <section class="columns is-multiline">
+            <figure class="image column is-one-third mt-3 ml-5">
+                <img src="https://m.media-amazon.com/images/M/MV5BYTViNzMxZjEtZGEwNy00MDNiLWIzNGQtZDY2MjQ1OWViZjFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg">
+            </figure>
+
+            <div class="column is-auto mt-3">
+                <h2 class="title">Title: </h2>
+                <h3 class="title subtitle">Actors</h3>
+                <p class="subtitle">Director</p>
+                <p>Rating</p>
+                <p>Release Date</p>
+                <p>Review Score</p>
+                <hr>
+                <p>Plot Summary: </p>
+                <p>
+                    A human soldier is sent from 2029 to 1984 to stop an almost indestructible cyborg killing machine, sent from the same year, which has been programmed to execute a young woman whose unborn son is the key to humanity's future salvat...
+                </p>
+            </div>
+            <div class="column is-full pl-6">
+                Third column
+            </div>
+            <div class="column is-full pl-6">
+                Fourth column
+            </div>
         </section>
     </main>
 
