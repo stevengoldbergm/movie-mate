@@ -49,16 +49,54 @@ function pullMovieData(event) {
     var searchResult = omdbSearch + searchValue + OMDbApiKey
     console.log(searchResult);
 
-    fetch(searchResult) 
-    .then( function (response) {
+    fetch(searchResult)
+    .then(function (response) {
         console.log(response);
         console.log("response Status: ", response.status);
         return response.json();
     })
     .then(function (data) {
         console.log(data);
-        console.log(data.Plot)
         // Data works!
+        // Add Variables
+        console.log("Data Variables Start:")
+
+        // Define Title
+        var title = data.Title
+        console.log(title)
+
+        // Define Actors
+        var actors = data.Actors
+        console.log(actors)
+
+        // Define Directors
+        var directors = data.Director
+        console.log(directors)
+
+        // Define Rated
+        var rated = data.Rated
+        console.log(rated)
+
+        // Define Release Date
+        var releaseDate = data.Released
+        console.log(releaseDate)
+
+        // Define Review Score
+        var reviewScore = data.imdbRating
+        console.log(reviewScore)
+
+        // Define Genre
+        var genre = data.Genre
+        console.log(genre)
+
+        //Define Writers
+        var writers = data.Writer
+        console.log (writers)
+
+        // Define Plot
+        var plot = data.Plot;
+        console.log(plot);
+
     })
 
     var ytSearchResult = ytSearch + searchValue + plusTrailer + ytPart + ytType + ytResults + ytApiKey
