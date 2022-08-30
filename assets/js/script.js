@@ -33,7 +33,7 @@ var OMDbApiKey = '&apikey=c26a6eef'
 var youTubeApiKey = 'AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s'
 
 var ytSearch = 'https://youtube.googleapis.com/youtube/v3/search?q='
-var plusTrailer = "movie trailer"
+var plusTrailer = " movie trailer"
 var ytApiKey = '&key=AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s'
 var ytPart = '&part=snippet'
 var ytType = '&type=video'
@@ -57,6 +57,7 @@ function pullMovieData(event) {
     })
     .then(function (data) {
         console.log(data);
+        console.log(data.Plot)
         // Data works!
     })
 
