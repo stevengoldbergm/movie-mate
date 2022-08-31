@@ -9,3 +9,23 @@ html,body {
     font-family: 'Tangerine', serif;
     font-size: 48px;
 }
+
+.papyrus {
+    font-family: 'Papyrus';
+}
+
+.courier-new {
+    font-family: 'courier-new';
+}
+
+.fantasy {
+    font-family: 'Luminari, fantasy';
+}
+
+.typewriter {
+    font-family: 'American Typewriter, serif';
+}
+
+.optima {
+    font-family: 'Optima, sans-serif';
+}
