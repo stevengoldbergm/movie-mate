@@ -29,9 +29,15 @@ var ytResults = '&maxResults=1'
 var ytEmbedBase = 'https://www.youtube.com/embed/'
 
 function pullMovieData(event) {
-    mainDataEl.classList.remove("is-hidden");
+    console.log("Clickable Object: ", event.object)
     console.log(event.type);
     console.log(searchEl.value);
+    if (!searchEl.value) {
+        return;
+    }
+
+    mainDataEl.classList.remove("is-hidden");
+
     // Front page puts in search
     // Second page loads - do this later
     var searchValue = searchEl.value;
@@ -104,6 +110,20 @@ function pullMovieData(event) {
         movieDataEl.children[8].textContent = "Writers: " + writers
         movieDataEl.children[9].textContent = "Plot Summary:"
         movieDataEl.children[10].textContent = plot
+
+        // Add History Button
+        var movieSave = searchEl.value
+        console.log("Movie save name: " + movieSave)
+        localStorage.setItem("MovieMate: " + movieSave, movieSave)
+        console.log(localStorage.getItem("MovieMate: " + movieSave))  
+
+        var newLink = document.createElement("a");
+        newLink.classList.add("dropdown-item");
+        newLink.textContent = searchEl.value;
+        console.log(newLink.textContent)
+        console.log(newLink)
+        console.log(dropDownMenuContent)
+        dropDownMenuContent.prepend(newLink);
     })
 
     var ytSearchResult = ytSearch + searchValue + plusTrailer + ytPart + ytType + ytResults + ytApiKey
@@ -124,9 +144,37 @@ function pullMovieData(event) {
         ytEmbedEl.src = ytEmbed
     })
     
-    
+    // Add Search Term to Local Memory
+    var movieSave = searchEl.value
+    console.log("Movie save name: " + movieSave)
+    localStorage.setItem("MovieMate: " + movieSave, movieSave)
+    console.log(localStorage.getItem("MovieMate: " + movieSave))    
 
 }
+
+
+    var dropDownMenu = document.getElementById("dropdown-menu3");
+    var dropDownMenuContent = document.querySelector('.dropdown-content')
+
+    var keys = Object.keys(localStorage)
+    console.log(keys)
+    for (i = 0; i < keys.length; i++) {
+        // Make a new a object
+        var newLink = document.createElement("a");
+        newLink.classList.add("dropdown-item");
+        newLink.textContent = keys[i].substring(11);
+        console.log(newLink.textContent)
+        console.log(newLink)
+        console.log(dropDownMenuContent)
+        dropDownMenuContent.prepend(newLink);
+        
+    }
+
+    function clearLocalStorage() {
+        localStorage.clear();
+        location.reload()
+    }
+
 
 
 

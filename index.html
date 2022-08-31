@@ -33,9 +33,43 @@
                         <section class="column is-three-fifths is-12-mobile">
                             <form id='srch-form' action="">
                                 <p class="control center" >
-                                    <input class="input" id='srch-title' type="text" placeholder="Movie Title">
+                                    <input class="input" id='srch-title' type="text" placeholder="Movie Title" autocomplete="off">
                                 </p>
+                                <br>
+                                <section>
+                                    <button class="button is-info">
+                                        Search Movies
+                                    </button>
+
+                                    <!-- Dropdown Start -->
+                                    <div class="dropdown is-hoverable">
+                                        <div class="dropdown-trigger">
+                                          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                                            <span>Search History</span>
+                                            <span class="icon is-small">
+                                              <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                            </span>
+                                          </button>
+                                        </div>
+        
+                                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                                            <div class="dropdown-content">
+                            
+                                                <hr class="dropdown-divider">
+
+                                                <!-- Make the clear history button here -->
+                                                <a onclick="clearLocalStorage()" href="#" class="dropdown-item">
+                                                Clear History
+                                                </a>
+        
+                                            </div>
+                                        </div>
+                                      </div>
+
+                                </section>
+
                             </form>
+
                         </section>
 
                         <section class="column is-one-fifth is-hidden-mobile"></section>
