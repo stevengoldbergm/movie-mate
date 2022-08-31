@@ -1,27 +1,15 @@
 // Our JavaScript Page
 console.log("My javascript is working")
 
-// youTubeApiKey: AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s
-// q=[searchTerm]
-// type=video
-// part=snippet
+var mainDataEl = document.getElementById("main-data")
+var ytEmbedEl = document.getElementById('yt-embed') 
+var moviePosterEl = document.getElementById("movie-poster");
+var movieDataEl = document.getElementById("movie-data");
+console.log(movieDataEl.children)
 
-// baseSearch: https://youtube.googleapis.com/youtube/v3/search?key=[YOUR_API_KEY]
-// testSearch:https://youtube.googleapis.com/youtube/v3/search?q=Terminator Movie Trailer&part=snippet&type=video&key=AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s
-
-// After the search pull videoId: data.items[0].id.videoId for the video ID
-
-// embedVideo: 'https://www.youtube.com/embed/'+ videoId
-
-// ----------------- Youtube API done // 
-
-// OMDB start:
-
-// OMDbApiKey: c26a6eef
-
-// baseSearch: http://www.omdbapi.com/?s=terminator&apikey=c26a6eef
 var searchFormEl = document.querySelector("#srch-form");
 var searchEl = document.querySelector("#srch-title");
+
 searchFormEl.addEventListener('submit', function(event) {
     event.preventDefault();
     pullMovieData(event);
@@ -41,6 +29,7 @@ var ytResults = '&maxResults=1'
 var ytEmbedBase = 'https://www.youtube.com/embed/'
 
 function pullMovieData(event) {
+    mainDataEl.classList.remove("is-hidden");
     console.log(event.type);
     console.log(searchEl.value);
     // Front page puts in search
@@ -97,6 +86,24 @@ function pullMovieData(event) {
         var plot = data.Plot;
         console.log(plot);
 
+        // Define Poster
+        var poster = data.Poster
+        console.log(poster)
+
+        // Enter Poster Data
+        moviePosterEl.src = poster
+
+        // Enter Data into Data Card
+        movieDataEl.children[0].textContent = "Title: " + title
+        movieDataEl.children[1].textContent = "Actors: " + actors
+        movieDataEl.children[2].textContent = "Directed By: " + directors
+        movieDataEl.children[3].textContent = "Rated: " + rated
+        movieDataEl.children[4].textContent = "Released: " + releaseDate
+        movieDataEl.children[5].textContent = "IMDB Review Score: " +reviewScore
+        movieDataEl.children[7].textContent = "Genre: " + genre
+        movieDataEl.children[8].textContent = "Writers: " + writers
+        movieDataEl.children[9].textContent = "Plot Summary:"
+        movieDataEl.children[10].textContent = plot
     })
 
     var ytSearchResult = ytSearch + searchValue + plusTrailer + ytPart + ytType + ytResults + ytApiKey
@@ -114,12 +121,12 @@ function pullMovieData(event) {
         console.log(ytEmbedId);
         var ytEmbed = ytEmbedBase + ytEmbedId;
         console.log(ytEmbed);
+        ytEmbedEl.src = ytEmbed
     })
     
     
 
 }
-
 
 
 
