@@ -10,20 +10,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<title>Title</title>
+<title>MovieMate - Find Movie Info Quick</title>
 </head>
 
 <body>
     <header>
-        <section class="hero has-background-grey-light has-text-centered">
+        <section class="hero has-background-info has-text-centered">
             <div class="hero-body">
                 <div class="container">
-
-                    <h1 class="title tangerine">
-                        MovieMate
+                    
+                    <h1 class="title tangerine has-text-white">
+                        <span class="icon is-small mr-5">
+                            <i class="fas fa-ticket-alt"></i>
+                        </span>
+                            MovieMate    
+                        <span class="icon is-small ml-5">
+                            <i class="fas fa-ticket-alt"></i>
+                        </span>
                     </h1>
 
-                    <h2 class="subtitle">
+                    <h2 class="subtitle has-text-white">
                         Search for movies - Get the details!
                     </h2>
     
@@ -36,20 +42,22 @@
                                     <input class="input" id='srch-title' type="text" placeholder="Movie Title" autocomplete="off">
                                 </p>
                                 <br>
+
+                                <!-- Remove entire section from form. Set button for= 'srch-form' -->
                                 <section>
-                                    <button class="button is-info">
+                                    <button class="button is-info is-light has-text-black">
                                         Search Movies
                                     </button>
 
                                     <!-- Dropdown Start -->
                                     <div class="dropdown is-hoverable">
                                         <div class="dropdown-trigger">
-                                          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                                          <div class="has-background-info-light has-text-black is-normal p-2 ml-1 is-size-6 is-roundeds" aria-haspopup="true" aria-controls="dropdown-menu3" disabled="true">
                                             <span>Search History</span>
                                             <span class="icon is-small">
                                               <i class="fas fa-angle-down" aria-hidden="true"></i>
                                             </span>
-                                          </button>
+                                          </div>
                                         </div>
         
                                         <div class="dropdown-menu" id="dropdown-menu3" role="menu">
@@ -84,8 +92,7 @@
         <section id="main-data" class="columns is-multiline is-hidden">
 
             <!-- Column 1 -->
-            <div class="column is-1 is-hidden-mobile">
-                left-spacer
+            <div class="column is-1 is-hidden-mobile has-background-info">
             </div>
 
             <!-- Column 2 (has 2 columns) -->
@@ -111,47 +118,31 @@
                     <p class="is-size-5">
                         A human soldier is sent from 2029 to 1984 to stop an almost indestructible cyborg killing machine, sent from the same year, which has been programmed to execute a young woman whose unborn son is the key to humanity's future salvat...
                     </p>
-                    <!-- <div class="column is-full">
-                        <figure class="image is-16by9">
-                            <iframe id="yt-embed" class="has-ratio" width="640" height="360" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
-                        </figure>
-                    </div> -->
                 </div>
-
                 <div class="column is-full">
+                    <hr>
+
                     <figure class="image is-16by9">
                         <iframe id="yt-embed" class="has-ratio" width="640" height="360" src="https://via.placeholder.com/640x360" frameborder="0" allowfullscreen></iframe>
                     </figure>
+
+                    <footer id="footer" class="has-text-centered is-hidden">
+                        Group 5 MovieMate App © 2022 
+                    </footer>
                 </div>
 
             </div>
 
             <!-- Column 3 -->
-            <div class="column is-1 is-hidden-mobile">
-                right-spacer
+            <div class="column is-1 is-hidden-mobile has-background-info">
             </div>
 
-            <!-- Second Row Start -->
-            <!-- Column -->
-            <!-- <div class="columns column is-full pl-6 is-hidden-desktop">
-
-                <div class="column is-2 is-hidden-mobile">
-                    left-spacer
-                </div>
-
-                <div class="column is-8">
-                    <figure class="image is-16by9">
-                        <iframe class="has-ratio" width="640" height="360" src="https://www.youtube.com/embed/k64P4l2Wmeg" frameborder="0" allowfullscreen></iframe>
-                    </figure>
-                </div>
-
-                <div class="column is-2 is-hidden-mobile">
-                    right-spacer
-                </div>
-            </div> -->
-
         </section>
+
+
     </main>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>

@@ -4,6 +4,7 @@ console.log("My javascript is working")
 var mainDataEl = document.getElementById("main-data")
 var ytEmbedEl = document.getElementById('yt-embed') 
 var moviePosterEl = document.getElementById("movie-poster");
+var footer = document.getElementById("footer");
 var movieDataEl = document.getElementById("movie-data");
 console.log(movieDataEl.children)
 
@@ -15,10 +16,12 @@ searchFormEl.addEventListener('submit', function(event) {
     pullMovieData(event);
 });
 
-var omdbSearch = 'http://www.omdbapi.com/?t='
+var omdbSearch = 'https://www.omdbapi.com/?t=' // change t to s if you want a list of similar movie names
 var OMDbApiKey = '&apikey=c26a6eef'
 
 var youTubeApiKey = 'AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s'
+// var youTubeApiKey = 'AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s' // Steve's Key
+
 
 var ytSearch = 'https://youtube.googleapis.com/youtube/v3/search?q='
 var plusTrailer = " movie trailer"
@@ -29,14 +32,26 @@ var ytResults = '&maxResults=1'
 var ytEmbedBase = 'https://www.youtube.com/embed/'
 
 function pullMovieData(event) {
-    console.log("Clickable Object: ", event.object)
+    console.log("hasHistory: ", hasHistory);
+    // console.log("Clickable Object: ", event.target.textContent)
     console.log(event.type);
     console.log(searchEl.value);
+    console.log(event.target);
+    console.log(event.target.value);
+
+    // Return if search field is empty
     if (!searchEl.value) {
         return;
     }
 
+    // Return if Search History button is clicked
+    // NOTE: Must remove
+    // if (!event.target.value) {
+    //     return;
+    // }
+
     mainDataEl.classList.remove("is-hidden");
+    footer.classList.remove("is-hidden");
 
     // Front page puts in search
     // Second page loads - do this later
@@ -76,6 +91,10 @@ function pullMovieData(event) {
         var releaseDate = data.Released
         console.log(releaseDate)
 
+        // Define Year
+        var year = data.Year;
+        console.log(year)
+
         // Define Review Score
         var reviewScore = data.imdbRating
         console.log(reviewScore)
@@ -112,21 +131,31 @@ function pullMovieData(event) {
         movieDataEl.children[10].textContent = plot
 
         // Add History Button
-        var movieSave = searchEl.value
-        console.log("Movie save name: " + movieSave)
-        localStorage.setItem("MovieMate: " + movieSave, movieSave)
-        console.log(localStorage.getItem("MovieMate: " + movieSave))  
+        
+            var movieSave = searchEl.value
+            console.log("Movie save name: " + movieSave)
 
-        var newLink = document.createElement("a");
-        newLink.classList.add("dropdown-item");
-        newLink.textContent = searchEl.value;
-        console.log(newLink.textContent)
-        console.log(newLink)
-        console.log(dropDownMenuContent)
-        dropDownMenuContent.prepend(newLink);
-    })
+            console.log("Storage Test: ", localStorage.getItem("MovieMate: " + movieSave), movieSave)
 
-    var ytSearchResult = ytSearch + searchValue + plusTrailer + ytPart + ytType + ytResults + ytApiKey
+            if (!localStorage.getItem("MovieMate: " + movieSave)) {
+                
+                localStorage.setItem("MovieMate: " + movieSave, movieSave)
+
+                console.log(localStorage.getItem("MovieMate: " + movieSave))  
+
+                var newLink = document.createElement("a");
+
+                newLink.classList.add("dropdown-item");
+                newLink.textContent = searchEl.value;
+                console.log(newLink.textContent)
+                console.log(newLink)
+                console.log(dropDownMenuContent)
+                dropDownMenuContent.prepend(newLink);
+
+            }
+            
+
+            var ytSearchResult = ytSearch + title + " " + year + plusTrailer + ytPart + ytType + ytResults + ytApiKey
     console.log(ytSearchResult);
 
     fetch(ytSearchResult)
@@ -144,37 +173,55 @@ function pullMovieData(event) {
         ytEmbedEl.src = ytEmbed
     })
     
-    // Add Search Term to Local Memory
-    var movieSave = searchEl.value
-    console.log("Movie save name: " + movieSave)
-    localStorage.setItem("MovieMate: " + movieSave, movieSave)
-    console.log(localStorage.getItem("MovieMate: " + movieSave))    
+    // Reset hasHistory to false
+    hasHistory = false;
+
+    })
+
 
 }
 
 
-    var dropDownMenu = document.getElementById("dropdown-menu3");
-    var dropDownMenuContent = document.querySelector('.dropdown-content')
+var dropDownMenu = document.getElementById("dropdown-menu3");
+dropDownMenuContent = document.querySelector('.dropdown-content')
+var keys = Object.keys(localStorage)
 
-    var keys = Object.keys(localStorage)
-    console.log(keys)
-    for (i = 0; i < keys.length; i++) {
-        // Make a new a object
-        var newLink = document.createElement("a");
-        newLink.classList.add("dropdown-item");
-        newLink.textContent = keys[i].substring(11);
-        console.log(newLink.textContent)
-        console.log(newLink)
-        console.log(dropDownMenuContent)
-        dropDownMenuContent.prepend(newLink);
-        
+console.log(keys)
+for (i = 0; i < keys.length; i++) {
+    // Make a new a object
+    var newLink = document.createElement("a");
+    newLink.classList.add("dropdown-item");
+    newLink.textContent = keys[i].substring(11);
+    console.log(newLink.textContent);
+    console.log(newLink);
+    console.log(dropDownMenuContent);
+    dropDownMenuContent.prepend(newLink);
+    
+}
+
+function clearLocalStorage() {
+    localStorage.clear();
+    location.reload();
+}
+
+// Add event listeners to drop-down
+
+var dropDownMenuContent = document.querySelector('.dropdown-content')
+dropDownMenuContent.addEventListener("click", fillSearch);
+
+var hasHistory = false
+
+function fillSearch (event) {
+    if(!event.target.textContent) {
+        return;
     }
+    console.log(event)
+    console.log(event.target)
+    console.log(event.target.textContent)
+    searchEl.value = event.target.textContent;
+    hasHistory = true
+    pullMovieData(event);
 
-    function clearLocalStorage() {
-        localStorage.clear();
-        location.reload()
-    }
-
-
+}
 
 
