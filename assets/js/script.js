@@ -1,6 +1,4 @@
-// Our JavaScript Page
-console.log("My javascript is working")
-
+// Define Global Variables
 var mainDataEl = document.getElementById("main-data")
 var ytEmbedEl = document.getElementById('yt-embed') 
 var moviePosterEl = document.getElementById("movie-poster");
@@ -11,18 +9,32 @@ console.log(movieDataEl.children)
 var searchFormEl = document.querySelector("#srch-form");
 var searchEl = document.querySelector("#srch-title");
 
+// Add event listeners to drop-down
+var dropDownMenuContent = document.querySelector('.dropdown-content')
+dropDownMenuContent.addEventListener("click", fillSearch);
+
+// Has this been searched before?
+var hasHistory = false
+
+// Search History objects
+var dropDownMenu = document.getElementById("dropdown-menu3");
+dropDownMenuContent = document.querySelector('.dropdown-content')
+var keys = Object.keys(localStorage)
+
+// Stop submit form from refreshing
 searchFormEl.addEventListener('submit', function(event) {
     event.preventDefault();
     pullMovieData(event);
 });
 
+// OMDB Key Variables
 var omdbSearch = 'https://www.omdbapi.com/?t=' // change t to s if you want a list of similar movie names
 var OMDbApiKey = '&apikey=c26a6eef'
 
+
+// Youtube Search Variables
 var youTubeApiKey = 'AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s'
 // var youTubeApiKey = 'AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s' // Steve's Key
-
-
 var ytSearch = 'https://youtube.googleapis.com/youtube/v3/search?q='
 var plusTrailer = " movie trailer"
 var ytApiKey = '&key=AIzaSyArL85QacNinNMsTR0SLDijTFsPP8JkT0s'
@@ -31,6 +43,7 @@ var ytType = '&type=video'
 var ytResults = '&maxResults=1'
 var ytEmbedBase = 'https://www.youtube.com/embed/'
 
+// Function to pull movie data (which is everything)
 function pullMovieData(event) {
     console.log("hasHistory: ", hasHistory);
     // console.log("Clickable Object: ", event.target.textContent)
@@ -44,21 +57,16 @@ function pullMovieData(event) {
         return;
     }
 
-    // Return if Search History button is clicked
-    // NOTE: Must remove
-    // if (!event.target.value) {
-    //     return;
-    // }
-
+    // Unhide the placeholder elements
     mainDataEl.classList.remove("is-hidden");
     footer.classList.remove("is-hidden");
 
-    // Front page puts in search
-    // Second page loads - do this later
+    // Define Search Variables
     var searchValue = searchEl.value;
     var searchResult = omdbSearch + searchValue + OMDbApiKey
     console.log(searchResult);
 
+    // Fetch Data from OMDB
     fetch(searchResult)
     .then(function (response) {
         console.log(response);
@@ -118,7 +126,7 @@ function pullMovieData(event) {
         // Enter Poster Data
         moviePosterEl.src = poster
 
-        // Enter Data into Data Card
+        // Enter Data into Main Data Card
         movieDataEl.children[0].textContent = "Title: " + title
         movieDataEl.children[1].textContent = "Actors: " + actors
         movieDataEl.children[2].textContent = "Directed By: " + directors
@@ -131,16 +139,16 @@ function pullMovieData(event) {
         movieDataEl.children[10].textContent = plot
 
         // Add History Button
-        
+
+            // Define Variables
             var movieSave = searchEl.value
             console.log("Movie save name: " + movieSave)
-
             console.log("Storage Test: ", localStorage.getItem("MovieMate: " + movieSave), movieSave)
 
+            // Don't add history button if local storage already exists
             if (!localStorage.getItem("MovieMate: " + movieSave)) {
-                
+                // If no local storage, then:
                 localStorage.setItem("MovieMate: " + movieSave, movieSave)
-
                 console.log(localStorage.getItem("MovieMate: " + movieSave))  
 
                 var newLink = document.createElement("a");
@@ -150,14 +158,16 @@ function pullMovieData(event) {
                 console.log(newLink.textContent)
                 console.log(newLink)
                 console.log(dropDownMenuContent)
+
                 dropDownMenuContent.prepend(newLink);
-
             }
-            
 
-            var ytSearchResult = ytSearch + title + " " + year + plusTrailer + ytPart + ytType + ytResults + ytApiKey
+    // Search Youtube for trailer
+    // Define youtube search
+    var ytSearchResult = ytSearch + title + " " + year + plusTrailer + ytPart + ytType + ytResults + ytApiKey
     console.log(ytSearchResult);
 
+    // Pull YT data 
     fetch(ytSearchResult)
     .then(function (response) {
         console.log(response);
@@ -172,20 +182,19 @@ function pullMovieData(event) {
         console.log(ytEmbed);
         ytEmbedEl.src = ytEmbed
     })
+
+    // Change title of webpage to search result
+    var webpageTitle = document.getElementById("web-title")
+    console.log("webtitle:", webpageTitle.textContent)
+    webpageTitle.textContent = "MovieMate - " + title;
+    })
     
     // Reset hasHistory to false
     hasHistory = false;
 
-    })
-
-
 }
 
-
-var dropDownMenu = document.getElementById("dropdown-menu3");
-dropDownMenuContent = document.querySelector('.dropdown-content')
-var keys = Object.keys(localStorage)
-
+// Generate Search History on start-up
 console.log(keys)
 for (i = 0; i < keys.length; i++) {
     // Make a new a object
@@ -199,29 +208,22 @@ for (i = 0; i < keys.length; i++) {
     
 }
 
+// Function to clear storage
 function clearLocalStorage() {
     localStorage.clear();
     location.reload();
 }
 
-// Add event listeners to drop-down
-
-var dropDownMenuContent = document.querySelector('.dropdown-content')
-dropDownMenuContent.addEventListener("click", fillSearch);
-
-var hasHistory = false
-
+// Use search history buttons to enter search value, then pull movie data
 function fillSearch (event) {
     if(!event.target.textContent) {
         return;
     }
+
     console.log(event)
     console.log(event.target)
     console.log(event.target.textContent)
     searchEl.value = event.target.textContent;
     hasHistory = true
     pullMovieData(event);
-
 }
-
-
