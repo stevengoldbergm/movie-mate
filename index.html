@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<title>MovieMate - Find Movie Info Quick</title>
+<title id="web-title">MovieMate - Find Movie Info Quick</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <section class="hero has-background-info has-text-centered">
             <div class="hero-body">
                 <div class="container">
-                    
+                    <!-- Title banner for app -->
                     <h1 class="title tangerine has-text-white">
                         <span class="icon is-small mr-5">
                             <i class="fas fa-ticket-alt"></i>
@@ -32,7 +32,8 @@
                     <h2 class="subtitle has-text-white">
                         Search for movies - Get the details!
                     </h2>
-    
+                    
+                    <!-- Search/History buttons start -->
                     <header class="columns">
                         <section class="column is-one-fifth is-hidden-mobile"></section>
 
@@ -42,8 +43,7 @@
                                     <input class="input" id='srch-title' type="text" placeholder="Movie Title" autocomplete="off">
                                 </p>
                                 <br>
-
-                                <!-- Remove entire section from form. Set button for= 'srch-form' -->
+                                <!-- Search Button -->
                                 <section>
                                     <button class="button is-info is-light has-text-black">
                                         Search Movies
@@ -52,12 +52,12 @@
                                     <!-- Dropdown Start -->
                                     <div class="dropdown is-hoverable">
                                         <div class="dropdown-trigger">
-                                          <div class="has-background-info-light has-text-black is-normal p-2 ml-1 is-size-6 is-roundeds" aria-haspopup="true" aria-controls="dropdown-menu3" disabled="true">
-                                            <span>Search History</span>
-                                            <span class="icon is-small">
-                                              <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                            </span>
-                                          </div>
+                                            <div class="has-background-info-light has-text-black is-normal p-2 ml-1 is-size-6 is-roundeds" aria-haspopup="true" aria-controls="dropdown-menu3" disabled="true">
+                                                <span>Search History</span>
+                                                <span class="icon is-small">
+                                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
                                         </div>
         
                                         <div class="dropdown-menu" id="dropdown-menu3" role="menu">
@@ -88,22 +88,27 @@
           </section>
     </header>
 
+
+    <!-- Main Section starts hidden -->
     <main>
         <section id="main-data" class="columns is-multiline is-hidden">
 
             <!-- Column 1 -->
+            <!-- This is a spacer -->
             <div class="column is-1 is-hidden-mobile has-background-info">
             </div>
 
-            <!-- Column 2 (has 2 columns) -->
+            <!-- Column 2 (section with 2 columns) -->
             <div class="columns column is-multiline is-10 pl-5 pr-5 no-margins is-justify-content-center-mobile">
 
                 <!-- Column 2.1 -->
+                <!-- Movie Poster on Left -->
                 <figure class="column is-two-fifths is-10-mobile is-offset-1-mobile mt-3">
-                    <img id="movie-poster" class="image is-2by3 is-half-tablet is-fullwidth pt-0 pr-0" src="https://via.placeholder.com/480x720">
+                    <img id="movie-poster" class="image is-2by3 is-half-tablet is-fullwidth pt-0 pr-0" src="https://via.placeholder.com/480x720" alt="Movie Poster">
                 </figure>
 
                 <!-- Column 2.2 -->
+                <!-- Movie Details on Right -->
                 <div id= "movie-data" class="column is-three-fifths is-half-tablet mt-3 is-justify-content-space-around is-flex is-flex-direction-column">
                     <h1 class="title is-size-2 papyrus">Title: </h1>
                     <h1 class="title is-size-4 subtitle courier-new">Actors: </h1>
@@ -122,10 +127,13 @@
                 <div class="column is-full">
                     <hr>
 
+                    <!-- Youtube Trailer embed -->
+                    <!-- Goes below the 2 column section -->
                     <figure class="image is-16by9">
-                        <iframe id="yt-embed" class="has-ratio" width="640" height="360" src="https://via.placeholder.com/640x360" frameborder="0" allowfullscreen></iframe>
+                        <iframe id="yt-embed" class="has-ratio" width="640" height="360" src="https://via.placeholder.com/640x360" frameborder="0" allowfullscreen alt="Movie Trailer"></iframe>
                     </figure>
-                    
+
+                    <!-- Footer -->
                     <footer id="footer" class="has-text-centered is-hidden">
                         Group 5 MovieMate App © 2022 
                     </footer>
@@ -134,12 +142,11 @@
             </div>
 
             <!-- Column 3 -->
+            <!-- This is a spacer -->
             <div class="column is-1 is-hidden-mobile has-background-info">
             </div>
 
         </section>
-
-
     </main>
 
 
