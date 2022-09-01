@@ -34,3 +34,7 @@ html,body {
 .no-margins {
     margin: 0px;
 }
+
+.is-roundeds {
+    border-radius: 5px;
+}
