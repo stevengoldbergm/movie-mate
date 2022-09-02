@@ -30,6 +30,7 @@ searchFormEl.addEventListener('submit', function(event) {
 // OMDB Key Variables
 var omdbSearch = 'https://www.omdbapi.com/?t=' // change t to s if you want a list of similar movie names
 var OMDbApiKey = '&apikey=c26a6eef'
+var omdbPlot = '&plot=full'
 
 
 // Youtube Search Variables
@@ -63,7 +64,7 @@ function pullMovieData(event) {
 
     // Define Search Variables
     var searchValue = searchEl.value;
-    var searchResult = omdbSearch + searchValue + OMDbApiKey
+    var searchResult = omdbSearch + searchValue + omdbPlot + OMDbApiKey
     console.log(searchResult);
 
     // Fetch Data from OMDB
@@ -127,7 +128,7 @@ function pullMovieData(event) {
         moviePosterEl.src = poster
 
         // Enter Data into Main Data Card
-        movieDataEl.children[0].textContent = "Title: " + title
+        movieDataEl.children[0].textContent = title
         movieDataEl.children[1].textContent = "Actors: " + actors
         movieDataEl.children[2].textContent = "Directed By: " + directors
         movieDataEl.children[3].textContent = "Rated: " + rated
